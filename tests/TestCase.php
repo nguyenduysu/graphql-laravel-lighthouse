@@ -9,4 +9,5 @@ abstract class TestCase extends BaseTestCase
 {
     use CreatesApplication;
     use MakesGraphQLRequests;
+    use createJWT;
 }

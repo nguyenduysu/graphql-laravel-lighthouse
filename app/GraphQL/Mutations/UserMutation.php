@@ -24,25 +24,6 @@ class UserMutation
         // TODO implement the resolver
     }
 
-    public function login($rootValue, array $args) {
-        $credentials = [
-            'email' => $args['email'],
-            'password' => $args['password']
-        ];
-
-        $token = auth()->attempt($credentials);
-        if(!$token) {
-            throw new \Exception("Unauthorized");
-        }
-
-        $authPayload = new \stdClass();
-        $authPayload->token = $token;
-        $authPayload->type = "Bearer";
-        $authPayload->expired = auth()->factory()->getTTL()*60;
-
-        return $authPayload;
-    }
-
     public function delete($rootValue, array $args)
     {
         $user = User::find($args['id']);

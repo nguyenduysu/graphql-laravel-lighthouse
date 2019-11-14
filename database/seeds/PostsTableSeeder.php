@@ -1,5 +1,5 @@
 <?php
-
+//database/seeds/PostsTableSeeder.php
 use Illuminate\Database\Seeder;
 
 class PostsTableSeeder extends Seeder

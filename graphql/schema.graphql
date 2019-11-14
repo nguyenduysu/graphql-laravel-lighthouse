@@ -28,8 +28,13 @@ type AuthPayload {
 }
 
 type Query {
+    login(email: String!, password: String!): AuthPayload
+        @field(resolver: "UserQuery@login")
+
     users: [User!]! @paginate
+    allUsers: [User!]! @all
     user(id: ID! @eq): User @find
+    postsOrderBy(orderBy: [OrderByClause!] @orderBy): [User!]! @all
 
     posts: [Post!]! @paginate
     post(id: ID! @eq): Post @find
@@ -37,48 +42,35 @@ type Query {
     comments: [Comment!]! @all
     comment(id: ID! @eq): Comment @find
 }
-#@group(middleware: ["auth:api"])
-type Mutation  {
-    login(email: String!, password: String!): AuthPayload
-        @field(resolver: "UserMutation@login")
 
+type Mutation @middleware(checks: ["auth:api"])  {
     createUser(
         name: String!,
         email: String! @rules(apply: ["email", "unique:users"]),
         password: String! @rules(apply: ["min:6", "max:32"]) @bcrypt
-    ): User
-        @create
-        @middleware(checks: ["auth:api"])
+    ): User @create
 
     deleteUser(id: ID!): String
         @field(resolver: "UserMutation@delete")
-        @middleware(checks: ["auth:api"])
 
     editUser(email: String!, password: String!, passwordConfirm: String!): String
         @field(resolver: "UserMutation@update")
-        @middleware(checks: ["auth:api"])
 
     createPost(title: String!, content: String!): Post
         @field(resolver: "PostMutation@create")
-        @middleware(checks: ["auth:api"])
 
     editPost(id: ID!, title: String, content: String): Post
         @field(resolver: "PostMutation@update")
-        @middleware(checks: ["auth:api"])
 
     deletePost(id: ID!): String
         @field(resolver: "PostMutation@delete")
-        @middleware(checks: ["auth:api"])
 
     createComment(post_id:Int!, reply: String!): Comment
         @field(resolver: "CommentMutation@create")
-        @middleware(checks: ["auth:api"])
 
     editComment(id: ID!, reply: String): Comment
         @field(resolver: "CommentMutation@update")
-        @middleware(checks: ["auth:api"])
 
     deleteComment(id: ID!): String
         @field(resolver: "CommentMutation@delete")
-        @middleware(checks: ["auth:api"])
     }

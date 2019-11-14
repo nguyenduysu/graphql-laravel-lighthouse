@@ -9,16 +9,6 @@ use Tests\TestCase;
 
 class PostTest extends TestCase
 {
-    /**
-     * A basic unit test example.
-     *
-     * @return void
-     */
-    public function testExample()
-    {
-        $this->assertTrue(true);
-    }
-
     public function testQueryPost()
     {
         $faker = \Faker\Factory::create();
@@ -37,7 +27,7 @@ class PostTest extends TestCase
                     content
                     author {
                         id
-                    }
+                    }   
                     
                 }
             }
@@ -53,39 +43,25 @@ class PostTest extends TestCase
                         ]
                     ]
                 ]);
+        $post->delete();
     }
 
     public function testQueriesPosts()
     {
-//        $userA = factory(User::class)->create(['name' => 'A']);
-//        $userB = factory(User::class)->create(['name' => 'B']);
-//        $userC = factory(User::class)->create(['name' => 'C']);
-
-//        $postA = factory(Post::class)->create(['user_id' => 17]);
-//        $postB = factory(Post::class)->create(['user_id' => 18]);
-//        $postC = factory(Post::class)->create(['user_id' => 19]);
-
-        $faker = \Faker\Factory::create();
-        for($i = 0; $i < 3; $i ++) {
-            $post = \App\Post::create([
-                'user_id' => rand(1, 10),
-                'title' => $faker->sentence,
-                'content' => $faker->sentence
-            ]);
-        }
-
+        $first = 3;
         $response = $this->graphQL('
-                posts(first: 10) {
-                    data {
-                        title
-                    }       
+                {
+                    posts(first: '.$first.') {
+                        data {
+                            id
+                            title
+                        }                 
+                    }
                 }
-            '
-        );
+            ');
 
-        $titles = $response->json("data.posts.*.title");
-
-        $this->assertCount(3, $titles);
-
+        $posts = $response->json('data.*.data.*');
+//        dd($posts);
+        $this->assertCount(3, $posts);
     }
 }
