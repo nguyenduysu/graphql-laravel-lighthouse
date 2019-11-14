@@ -34,7 +34,7 @@ type Query {
     users: [User!]! @paginate
     allUsers: [User!]! @all
     user(id: ID! @eq): User @find
-    postsOrderBy(orderBy: [OrderByClause!] @orderBy): [User!]! @all
+    usersOrderBy(orderBy: [OrderByClause!] @orderBy): [User!]! @all
 
     posts: [Post!]! @paginate
     post(id: ID! @eq): Post @find
