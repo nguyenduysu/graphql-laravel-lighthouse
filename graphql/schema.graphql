@@ -27,6 +27,11 @@ type AuthPayload {
     expired: Int!
 }
 
+type Subscription {
+    userCreated: User,
+    postUpdated(author: ID): Post
+}
+
 type Query {
     login(email: String!, password: String!): AuthPayload
         @field(resolver: "UserQuery@login")
@@ -48,7 +53,9 @@ type Mutation @middleware(checks: ["auth:api"])  {
         name: String!,
         email: String! @rules(apply: ["email", "unique:users"]),
         password: String! @rules(apply: ["min:6", "max:32"]) @bcrypt
-    ): User @create
+    ): User
+        @create
+
 
     deleteUser(id: ID!): String
         @field(resolver: "UserMutation@delete")
@@ -61,6 +68,7 @@ type Mutation @middleware(checks: ["auth:api"])  {
 
     editPost(id: ID!, title: String, content: String): Post
         @field(resolver: "PostMutation@update")
+        @broadcast(subscription: "postUpdated")
 
     deletePost(id: ID!): String
         @field(resolver: "PostMutation@delete")
@@ -73,4 +81,6 @@ type Mutation @middleware(checks: ["auth:api"])  {
 
     deleteComment(id: ID!): String
         @field(resolver: "CommentMutation@delete")
-    }
+}
+
+

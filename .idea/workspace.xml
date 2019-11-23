@@ -1,7 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="db1e53d6-c7cb-4ab3-b244-a7d4dfce98de" name="Default Changelist" comment="" />
+    <list default="true" id="db1e53d6-c7cb-4ab3-b244-a7d4dfce98de" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/laravel-graphql-lighthouse-v2.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/laravel-graphql-lighthouse-v2.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/app.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/app.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/graphql/schema.graphql" beforeDir="false" afterPath="$PROJECT_DIR$/graphql/schema.graphql" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -119,6 +127,8 @@
       <path value="$PROJECT_DIR$/vendor/symfony/polyfill-util" />
       <path value="$PROJECT_DIR$/vendor/lcobucci/jwt" />
       <path value="$PROJECT_DIR$/vendor/tymon/jwt-auth" />
+      <path value="$PROJECT_DIR$/vendor/paragonie/sodium_compat" />
+      <path value="$PROJECT_DIR$/vendor/pusher/pusher-php-server" />
     </include_path>
   </component>
   <component name="ProjectId" id="1TEeJucwgaJ4Q45jPFRilTvqyCg" />
@@ -126,7 +136,7 @@
   <component name="PropertiesComponent">
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../laravel-graphql-lighthouse" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
   </component>
@@ -174,7 +184,11 @@
       <workItem from="1573611880524" duration="24000" />
       <workItem from="1573627480238" duration="10489000" />
       <workItem from="1573639118017" duration="2496000" />
-      <workItem from="1573713671195" duration="8406000" />
+      <workItem from="1573713671195" duration="11643000" />
+      <workItem from="1573784014128" duration="6484000" />
+      <workItem from="1573871629246" duration="68000" />
+      <workItem from="1574059626510" duration="5040000" />
+      <workItem from="1574474854081" duration="243000" />
     </task>
     <servers />
   </component>

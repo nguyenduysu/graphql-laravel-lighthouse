@@ -14,8 +14,9 @@
         "laravel/tinker": "^1.0",
         "mll-lab/laravel-graphql-playground": "^1.1",
         "nuwave/lighthouse": "^4.6",
-        "tymon/jwt-auth": "1.0.*",
-        "phpunit/phpunit": "^8.4"
+        "phpunit/phpunit": "^8.4",
+        "pusher/pusher-php-server": "^4.1",
+        "tymon/jwt-auth": "1.0.*"
     },
     "require-dev": {
         "facade/ignition": "^1.4",
