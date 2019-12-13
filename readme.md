@@ -28,7 +28,7 @@ Laravel has the most extensive and thorough [documentation](https://laravel.com/
 If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
 
 ## Learning Graphql - Lighthouse
-[Go to this site] (https://lighthouse-php.com).
+[Go to this site] (https://lighthouse-php.com). <br>
 You can find more infomation to setup project step by step in (https://github.com/nguyenduysu/graphql-laravel-lighthouse/blob/master/Lighthouse-graphql-docs.docx)
 
 ## Clone And Run Project
