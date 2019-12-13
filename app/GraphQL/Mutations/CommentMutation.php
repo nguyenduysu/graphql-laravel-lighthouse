@@ -3,6 +3,7 @@
 namespace App\GraphQL\Mutations;
 
 use App\Comment;
+use App\Notifications\CommentCreatedNotification;
 use GraphQL\Type\Definition\ResolveInfo;
 use Nuwave\Lighthouse\Support\Contracts\GraphQLContext;
 
@@ -29,6 +30,8 @@ class CommentMutation
         $comment->post_id = $args['post_id'];
         $comment->reply = $args['reply'];
         $comment->save();
+
+        $context->user()->notify(new CommentCreatedNotification($comment));
 
         return $comment;
     }

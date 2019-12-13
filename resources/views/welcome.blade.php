@@ -3,12 +3,15 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="csrf-token" content="{{ csrf_token() }}">
 
         <title>Laravel</title>
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
-
+        <link href="{{ mix('/css/app.css') }}" rel="stylesheet">
+        <script src="{{ mix('/js/app.js') }}" defer></script>
+    </head>
         <!-- Styles -->
         <style>
             html, body {
@@ -64,6 +67,20 @@
         </style>
     </head>
     <body>
+        @if(!empty($user))
+            <form action="logout">
+                <button>Logout</button>
+            </form>
+        @endif
+        <div id="app">
+            <example-component></example-component>
+            <post-updated-component></post-updated-component>
+            <comment-created-component></comment-created-component>
+        </div>
+        @if(!empty($user))
+            <h2>{{ $user->id }}</h2>
+            <h2>{{ $user->email }}</h2>
+        @endif
         <div class="flex-center position-ref full-height">
             @if (Route::has('login'))
                 <div class="top-right links">
@@ -96,5 +113,6 @@
                 </div>
             </div>
         </div>
+
     </body>
 </html>

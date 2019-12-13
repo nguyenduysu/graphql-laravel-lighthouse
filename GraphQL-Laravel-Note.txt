@@ -1,0 +1,132 @@
+- git clone https://github.com/nguyenduysu/graphql-laravel-lighthouse.git
+- Copy .env.example, paste into the same foler and rename it to .env
+- Config database in .env file to your database
+- composer update
+- php artisan cache:clear
+- php artisan config:clear
+- php artisan key:generate
+- php artisan jwt:secret
+- php artisan serve
+- goto url: http://127.0.0.1:8000/graphql-playground to excute graphql query
+
+*Subscription
+- Setup:
+	+ Install the Pusher PHP Library for interacting with the Pusher HTTP API.
+		composer require pusher/pusher-php-server
+	+ Add the service provider to your config/app.php
+		'providers' => [
+    			\Nuwave\Lighthouse\Subscriptions\SubscriptionServiceProvider::class,
+		],
+	+ Define your subscriptions as field on the root Subscription type in your schema.
+		type Subscription {
+    			postUpdated(id: ID): Post
+		}
+	+ The quickest way to define such a field is through the artisan generator command:
+		php artisan lighthouse:subscription PostUpdated
+
+	+ Trigger Subscriptions: Broadcast Directive
+		The @broadcast directive will broadcast all updates to the Post model to the postUpdated subscription.
+
+		type Mutation {
+    			updatePost(input: UpdatePostInput!): Post
+        			@broadcast(subscription: "postUpdated")
+		}
+
+- Client Implementations: use Vue-apollo: https://vue-apollo.netlify.com/guide/installation.html#vue-cli-plugin
+	+ Install vue cli:
+		npm install -g @vue/cli  or composer require laravel/ui
+	+ Create App Vue:
+		vue create lighthouse-app or php artisan vue ui
+			
+	+ Apollo client full configuration
+		If you want some more fine grained control install these packages instead of apollo-boost:
+			npm install --save vue-apollo graphql apollo-client apollo-link apollo-link-http apollo-cache-inmemory graphql-tag
+	
+	+ Install laravel-echo pusher-js: npm install laravel-echo pusher-js 
+	+ create apollo client: apollo.js
+	+ create echo.link.js
+	+ update main.js
+	+ Configure the .env file with Channels credentials:
+		PUSHER_APP_ID=903265
+		PUSHER_APP_KEY=3f4c84b86ed43fab3ca3
+		PUSHER_APP_SECRET=26280cba9bd9035f3d07
+	
+
+- Install Websockets: https://docs.beyondco.de/laravel-websockets/1.0/getting-started/installation.html
+	+ Laravel WebSockets can be installed via composer:
+		composer require beyondcode/laravel-websockets
+	+ Next, you need to publish the WebSocket configuration file:
+		php artisan vendor:publish --provider="BeyondCode\LaravelWebSockets\WebSocketsServiceProvider" --tag="config"
+	+ Pusher Replacement:
+		Next, you should make sure to use Pusher as your broadcasting driver. 
+		This can be achieved by setting the BROADCAST_DRIVER environment variable in your .env file:
+			BROADCAST_DRIVER=pusher
+	+ Pusher Configuration:
+		In config/broadcasting.php:
+			'pusher' => [
+    				'driver' => 'pusher',
+    				'key' => env('PUSHER_APP_KEY'),
+    				'secret' => env('PUSHER_APP_SECRET'),
+    				'app_id' => env('PUSHER_APP_ID'),
+    				'options' => [
+        				'cluster' => env('PUSHER_APP_CLUSTER'),
+        				'encrypted' => true,
+        				'host' => '127.0.0.1',
+        				'port' => 6001,
+        				'scheme' => 'http'
+    				],
+			],
+
+- Install Redis: https://laravel.com/docs/6.x/redis
+	composer require predis/predis
+- In .env:
+	REDIS_CLIENT=predis
+- Define CORS
+
+
+* Laravel-Notification
+- CSRF Token:
+	<meta name="csrf-token" content="{{ csrf_token() }}">
+
+- Pusher Channels
+	composer require pusher/pusher-php-server "~4.0"
+
+- BROADCAST_DRIVER=pusher in .env file
+
+- Install laravel-websockets: https://docs.beyondco.de/laravel-websockets/1.0/getting-started/installation.html
+	composer require beyondcode/laravel-websockets
+	
+	php artisan vendor:publish --provider="BeyondCode\LaravelWebSockets\WebSocketsServiceProvider" --tag="config"
+
+- Install laravel-echo and pusher-js:
+	npm install --save laravel-echo pusher-js
+
+- Goto bootstrap.js:
+	import Echo from 'laravel-echo';
+
+	window.Pusher = require('pusher-js');
+
+	window.Echo = new Echo({
+    		broadcaster: 'pusher',
+    		key: process.env.MIX_PUSHER_APP_KEY,
+   		cluster: process.env.MIX_PUSHER_APP_CLUSTER,
+    		encrypted: true,
+    		wsHost: window.location.hostname,
+   		wsPort: 6001,
+    		disableStats: true,
+	});
+
+- Create migration table notifications:
+	php artisan notifications:table
+
+- make notification
+	php artisan make:notification UserRegistered
+
+	
+
+
+
+
+
+
+	
