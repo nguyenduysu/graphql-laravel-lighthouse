@@ -29,6 +29,7 @@ If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Lar
 
 ## Learning Graphql - Lighthouse
 [Go to this site] (https://lighthouse-php.com).
+You can find more infomation to setup project step by step in (https://github.com/nguyenduysu/graphql-laravel-lighthouse/blob/master/Lighthouse-graphql-docs.docx)
 
 ## Clone And Run Project
 1. Clone this project
